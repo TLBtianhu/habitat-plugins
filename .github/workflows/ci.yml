@@ -18,5 +18,7 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: node tools/build-plugin-packages.mjs
       - run: node tools/sign-plugin-index.mjs
+        env:
+          HABITAT_RELEASE_SIGNING_PRIVATE: /tmp/habitat-signing-private.pem
       - run: node tools/verify-plugin-index.mjs
       - run: node tools/verify-app-loading.mjs
