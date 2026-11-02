@@ -10,7 +10,7 @@ const SOURCE = process.argv[2] || path.join(ROOT, 'plugins');
 const DIST = path.join(ROOT, 'dist');
 const APPS = {
   qq: {
-    version: '0.1.2',
+    version: '0.1.3',
     dependencies: { ws: '^8.18.0' },
     files: [
       'adapters/qq/manifest.json', 'adapters/qq/provider.mjs',
@@ -97,7 +97,7 @@ for (const [id, def] of Object.entries(APPS)) {
     license: 'MIT',
     artifact: {
       file: `dist/app-${id}.zip`,
-      url: `https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.5/app-${id}.zip`,
+      url: `https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.6/app-${id}.zip`,
       sha256: hash,
     },
     revoked: false,

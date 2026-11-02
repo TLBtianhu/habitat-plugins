@@ -35,6 +35,8 @@ export class OneBotClient {
   }
 
   getLoginInfo() { return this._get('/get_login_info'); }
+  getMsg(messageId) { return this._get('/get_msg?message_id=' + encodeURIComponent(Number(messageId))); }
+  getGroupMsgHistory(groupId, count = 50) { return this._post('/get_group_msg_history', { group_id: groupId, count }); }
   sendGroupMsg(groupId, text) { return this._post('/send_group_msg', { group_id: groupId, message: text }); }
   sendPrivateMsg(userId, text) { return this._post('/send_private_msg', { user_id: userId, message: text }); }
 
