@@ -35,6 +35,7 @@ for (const id of ['qq', 'bilibili', 'mc', 'hls']) {
     if (!fs.existsSync(entry) || !fs.existsSync(path.join(dir, 'tools/pipeline.mjs'))) throw new Error('hls outlet files missing');
     const script = fs.readFileSync(entry, 'utf8');
     if (script.includes('/opt/habitat/app')) throw new Error('hls outlet must not hardcode the development app path');
+    if (!script.includes('HABITAT_NODE')) throw new Error('hls outlet must inherit the Supervisor Node runtime');
   } else {
     const { createHandlers, createRuntime } = await import(pathToFileURL(path.join(dir, 'adapters/mc/provider.mjs')).href);
     const runtime = createRuntime({ mcClientFactory: () => ({ obs: async () => ({ mode: 'play' }), act: async () => ({ ok: true }) }) });

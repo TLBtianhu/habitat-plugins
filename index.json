@@ -33,8 +33,8 @@
       "license": "MIT",
       "artifact": {
         "file": "dist/app-qq.zip",
-        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.3/app-qq.zip",
-        "sha256": "056994224e321477196cd270f27eb21e7408cbe7e7bcb09e32cb814a078e24fb"
+        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.4/app-qq.zip",
+        "sha256": "56d7d5626c2b237c297645f5324b8ee4a324e0041fa45fc202517fe349a6eb0e"
       },
       "revoked": false
     },
@@ -59,8 +59,8 @@
       "license": "MIT",
       "artifact": {
         "file": "dist/app-bilibili.zip",
-        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.3/app-bilibili.zip",
-        "sha256": "fcd475d4c3ae9d45eff8f651b7f298114208e71d35f68a81f6a0f5471d3a632a"
+        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.4/app-bilibili.zip",
+        "sha256": "ef818dc038be48d9e9b4d25dd9f62fa0dfcfa037e6bb60c144bdce5ebfd85589"
       },
       "revoked": false
     },
@@ -89,14 +89,14 @@
       "license": "MIT",
       "artifact": {
         "file": "dist/app-mc.zip",
-        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.3/app-mc.zip",
-        "sha256": "145df771e145dcb07f45d88c61971de42a060545edcbfd14ab3e4c10118394e4"
+        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.4/app-mc.zip",
+        "sha256": "0d015e1058df8cedba8672743fe984d52703b856935d6596cc8c3c479ac5f179"
       },
       "revoked": false
     },
     {
       "id": "hls",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "kind": "hls",
       "apiRange": "^1.0.0",
       "entry": "adapters/hls/manifest.json",
@@ -117,8 +117,8 @@
       "license": "MIT",
       "artifact": {
         "file": "dist/app-hls.zip",
-        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.3/app-hls.zip",
-        "sha256": "77608fcb69f9f786c8020ddd08b157c9aa69c96974023dbd2ab1f45f752e718b"
+        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.4/app-hls.zip",
+        "sha256": "a7454b8aedfc59ec1dc1bd5797ea21de0c81c7cb13d88bb976d8b74772179328"
       },
       "revoked": false
     }
