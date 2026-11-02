@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "bilibili",
+  "name": "bilibili",
+  "displayName": "B 站客户端",
+  "kind": "bilibili",
+  "version": "0.2.0",
+  "lifecycle": "adapter",
+  "session": { "kind": "bilibili" },
+  "entry": "server.mjs",
+  "capabilities": ["bilibili.read", "bilibili.danmaku", "bilibili.login"],
+  "authFlows": ["qrcode"],
+  "scopes": ["live.read", "live.write", "live.push"],
+  "tools": [],
+  "permissions": ["live.read", "live.write"]
+}

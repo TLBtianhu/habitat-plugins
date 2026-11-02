@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "mc",
+  "name": "mc",
+  "displayName": "Minecraft 客户端",
+  "kind": "mc",
+  "version": "0.2.0",
+  "lifecycle": "client",
+  "session": { "kind": "mc", "view": { "kind": "firstPerson" } },
+  "provider": "provider.mjs",
+  "entry": "server.mjs",
+  "capabilities": ["mc.obs", "mc.action", "mc.pixels"],
+  "authFlows": ["offline", "microsoft-device-code"],
+  "scopes": ["mc.join", "mc.chat", "mc.action"],
+  "tools": [
+    {
+      "name": "mc.obs",
+      "description": "读取 MC 稀疏文字观测，不包含桌面像素",
+      "handler": "obs",
+      "scope": "mc.join",
+      "concurrency": "parallel",
+      "idempotency": "none",
+      "timeoutMs": 12000,
+      "inputSchema": { "type": "object", "properties": {}, "additionalProperties": false }
+    },
+    {
+      "name": "mc.say",
+      "description": "只在 MC 游戏内聊天栏发言",
+      "handler": "say",
+      "scope": "mc.chat",
+      "concurrency": "serial",
+      "idempotency": "per-intent",
+      "timeoutMs": 12000,
+      "inputSchema": {
+        "type": "object",
+        "properties": { "text": { "type": "string" } },
+        "required": ["text"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "mc.look",
+      "description": "调整 MC 视角或看向指定坐标",
+      "handler": "look",
+      "scope": "mc.action",
+      "concurrency": "exclusive",
+      "idempotency": "none",
+      "timeoutMs": 12000,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "yaw": { "type": "number" },
+          "pitch": { "type": "number" },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "z": { "type": "number" },
+          "target": { "type": "array" },
+          "pos": { "type": "array" }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "mc.stop",
+      "description": "停止 MC 当前移动输入",
+      "handler": "stop",
+      "scope": "mc.action",
+      "concurrency": "exclusive",
+      "idempotency": "per-intent",
+      "timeoutMs": 12000,
+      "inputSchema": { "type": "object", "properties": {}, "additionalProperties": false }
+    }
+  ],
+  "permissions": ["mc.join", "mc.chat", "mc.action"]
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "ownerIds": [123456789],
+  "botNames": ["大肥鱼", "开发态habitat大肥鱼"],
+  "residences": {
+    "qq.group.987654321": {
+      "read": true,
+      "respond": "addressed",
+      "tools": ["qq.reply"],
+      "rateLimitMs": 5000,
+      "memory": "ephemeral",
+      "proactive": false
+    },
+    "qq.private.123456789": {
+      "read": true,
+      "respond": "always",
+      "tools": ["qq.reply"],
+      "rateLimitMs": 2000,
+      "memory": "residence",
+      "proactive": false
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "qq",
+  "name": "qq",
+  "displayName": "QQ 客户端",
+  "kind": "qq",
+  "version": "0.2.0",
+  "lifecycle": "adapter",
+  "session": { "kind": "qq" },
+  "provider": "provider.mjs",
+  "entry": "server.mjs",
+  "capabilities": ["qq.read", "qq.send", "desktop.capture"],
+  "authFlows": ["qrcode"],
+  "scopes": ["qq.read", "qq.send", "desktop.capture"],
+  "tools": [
+    {
+      "name": "qq.reply",
+      "description": "仅在 ResidencePolicy 允许时回复来源 QQ 群或私聊；目标由策略绑定，不能指定其他群或用户",
+      "handler": "reply",
+      "scope": "qq.send",
+      "concurrency": "serial",
+      "idempotency": "required",
+      "timeoutMs": 10000,
+      "inputSchema": {
+        "type": "object",
+        "properties": { "text": { "type": "string" } },
+        "required": ["text"],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "permissions": ["qq.read", "qq.send"]
+}

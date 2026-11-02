@@ -6,7 +6,7 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const SOURCE = process.argv[2] || path.join(ROOT, '..', 'deepseek直播-public');
+const SOURCE = process.argv[2] || path.join(ROOT, 'plugins');
 const DIST = path.join(ROOT, 'dist');
 const APPS = {
   qq: {
