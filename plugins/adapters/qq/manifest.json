@@ -5,7 +5,7 @@
   "displayName": "QQ 客户端",
   "kind": "qq",
   "version": "0.2.0",
-  "lifecycle": "adapter",
+  "lifecycle": "provider",
   "session": { "kind": "qq" },
   "provider": "provider.mjs",
   "entry": "server.mjs",
