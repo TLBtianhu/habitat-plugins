@@ -39,7 +39,7 @@ const APPS = {
     ],
   },
   hls: {
-    version: '0.1.1',
+    version: '0.1.2',
     dependencies: {},
     files: [
       'adapters/hls/manifest.json',
@@ -97,7 +97,7 @@ for (const [id, def] of Object.entries(APPS)) {
     license: 'MIT',
     artifact: {
       file: `dist/app-${id}.zip`,
-      url: `https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.4/app-${id}.zip`,
+      url: `https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.5/app-${id}.zip`,
       sha256: hash,
     },
     revoked: false,

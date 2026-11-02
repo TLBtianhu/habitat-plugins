@@ -15,6 +15,7 @@ const HLS_DIR = process.env.FB_HLS_DIR || '/var/lib/habitat/hls';
 const FPS = Number(process.env.FB_FPS || 5);
 const ART = process.env.FB_ART || '/var/lib/habitat/artifacts';
 const STATUS = path.join(ART, 'pipeline.json');
+const INSTANCE_ID = process.env.HABITAT_OUTLET_INSTANCE_ID || null;
 if (HLS) fs.mkdirSync(HLS_DIR, { recursive: true });
 fs.mkdirSync(ART, { recursive: true });
 
@@ -46,6 +47,7 @@ async function openCapture() {
         consumerApp: 'live',
         source: { kind: 'display', id: 'main' },
         excludeSurfaces: ['live'],
+        instanceId: INSTANCE_ID,
         fps: FPS,
       }),
       signal: AbortSignal.timeout(5000),
@@ -111,7 +113,12 @@ async function openAudioCapture() {
   if (!AUDIO) return;
   for (let attempt = 0; attempt < 10 && !shuttingDown; attempt++) {
     try {
-      const r = await fetch(`${AUDIO}/capture/open`, { method: 'POST', signal: AbortSignal.timeout(5000) });
+      const r = await fetch(`${AUDIO}/capture/open`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ consumer: 'hls', instanceId: INSTANCE_ID }),
+        signal: AbortSignal.timeout(5000),
+      });
       const data = await r.json();
       if (!r.ok) throw new Error(data.error || `HTTP ${r.status}`);
       audioCaptureId = data.id;
@@ -179,9 +186,11 @@ setInterval(() => {
   try { ff.stdin.write(latest); framesOut += 1; } catch {}
 }, Math.round(1000 / FPS));
 setInterval(pollFrame, Math.max(50, Math.round(1000 / FPS)));
-setInterval(() => {
+function writeStatus(extra = {}) {
   fs.writeFileSync(STATUS, JSON.stringify({
     at: Date.now(),
+    instanceId: INSTANCE_ID,
+    state: 'running',
     out: RTMP ? 'rtmp' : (HLS ? 'hls:' + path.join(HLS_DIR, 'live.m3u8') : OUT),
     captureId,
     audioCaptureId,
@@ -189,14 +198,17 @@ setInterval(() => {
     framesOut,
     frameSeq: latestSeq,
     frameAgeMs: latestAt ? Date.now() - latestAt : null,
+    ...extra,
   }, null, 2));
-}, 1000);
+}
+setInterval(writeStatus, 1000);
 
 async function shutdown(exitCode = 0) {
   if (shuttingDown) return;
   shuttingDown = true;
   await closeCapture();
   await closeAudioCapture();
+  writeStatus({ state: 'stopped', exitCode });
   try { ff.stdin.end(); } catch {}
   setTimeout(() => process.exit(exitCode), 300).unref();
 }
