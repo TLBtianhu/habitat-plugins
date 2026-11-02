@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "channel": "stable",
+  "apiRange": "^1.0.0",
+  "signature": {
+    "algorithm": "Ed25519",
+    "file": "index.sig.json",
+    "publicKey": "release-public-key.pem"
+  },
+  "revocations": "revocations.json",
+  "plugins": [
+    {
+      "id": "qq",
+      "version": "0.1.0",
+      "kind": "adapter",
+      "apiRange": "^1.0.0",
+      "entry": "adapters/qq/manifest.json",
+      "lifecycle": "adapter",
+      "capabilities": [
+        "qq.read",
+        "qq.send",
+        "desktop.capture"
+      ],
+      "scopes": [
+        "qq.read",
+        "qq.send",
+        "desktop.capture"
+      ],
+      "permissions": [
+        "qq.read",
+        "qq.send"
+      ],
+      "license": "MIT",
+      "artifact": {
+        "file": "dist/app-qq.zip",
+        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.0/app-qq.zip",
+        "sha256": "cc23c11c42c59123924799235bce7986fa7fa5d4f6e03b0b258e11a29b436c1f"
+      },
+      "revoked": false
+    },
+    {
+      "id": "bilibili",
+      "version": "0.1.0",
+      "kind": "adapter",
+      "apiRange": "^1.0.0",
+      "entry": "adapters/bilibili/manifest.json",
+      "lifecycle": "adapter",
+      "capabilities": [
+        "bilibili.read",
+        "bilibili.danmaku",
+        "bilibili.login"
+      ],
+      "scopes": [
+        "live.read",
+        "live.write",
+        "live.push"
+      ],
+      "permissions": [
+        "live.read",
+        "live.write"
+      ],
+      "license": "MIT",
+      "artifact": {
+        "file": "dist/app-bilibili.zip",
+        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.0/app-bilibili.zip",
+        "sha256": "bbda88ebaa90dfc165fdfe2311748c3b871995c31d9bbb31c30f2db8bae54649"
+      },
+      "revoked": false
+    },
+    {
+      "id": "mc",
+      "version": "0.1.0",
+      "kind": "adapter",
+      "apiRange": "^1.0.0",
+      "entry": "adapters/mc/manifest.json",
+      "lifecycle": "client",
+      "capabilities": [
+        "mc.obs",
+        "mc.action",
+        "mc.pixels"
+      ],
+      "scopes": [
+        "mc.join",
+        "mc.chat",
+        "mc.action"
+      ],
+      "permissions": [
+        "mc.join",
+        "mc.chat",
+        "mc.action"
+      ],
+      "license": "MIT",
+      "artifact": {
+        "file": "dist/app-mc.zip",
+        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.0/app-mc.zip",
+        "sha256": "8baa0739ff020b612392e9f339ca73f11a4bf14c1744ba3a5d4c0acde5fd2b19"
+      },
+      "revoked": false
+    }
+  ]
+}

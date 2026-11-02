@@ -1,0 +1,11 @@
+dist/
+.tmp/
+node_modules/
+*.log
+.env*
+*.token
+*.key
+*.pem
+*.pfx
+*.p12
+!release-public-key.pem
