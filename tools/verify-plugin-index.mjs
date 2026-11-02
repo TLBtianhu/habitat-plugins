@@ -25,4 +25,8 @@ const publicKey = fs.readFileSync(path.join(ROOT, 'release-public-key.pem'), 'ut
 if (!crypto.verify(null, canonical, publicKey, Buffer.from(sig.signature, 'base64'))) throw new Error('plugin index signature invalid');
 const revocations = JSON.parse(fs.readFileSync(path.join(ROOT, 'revocations.json'), 'utf8'));
 if (!Array.isArray(revocations.revoked)) throw new Error('invalid revocations');
+const revocationSig = JSON.parse(fs.readFileSync(path.join(ROOT, 'revocations.sig.json'), 'utf8'));
+if (!crypto.verify(null, JSON.stringify(revocations, null, 2) + '\n', publicKey, Buffer.from(revocationSig.signature, 'base64'))) {
+  throw new Error('revocations signature invalid');
+}
 console.log(`ok: ${index.plugins.length} app plugins · signatures, hashes and permissions valid`);

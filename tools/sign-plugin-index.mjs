@@ -24,4 +24,8 @@ const indexPath = path.join(ROOT, 'index.json');
 const canonical = JSON.stringify(JSON.parse(fs.readFileSync(indexPath, 'utf8')), null, 2) + '\n';
 const signature = crypto.sign(null, canonical, privateKey).toString('base64');
 fs.writeFileSync(path.join(ROOT, 'index.sig.json'), JSON.stringify({ algorithm: 'Ed25519', signature, publicKey: 'release-public-key.pem' }, null, 2) + '\n');
+const revocationsPath = path.join(ROOT, 'revocations.json');
+const revocations = JSON.stringify(JSON.parse(fs.readFileSync(revocationsPath, 'utf8')), null, 2) + '\n';
+const revocationSignature = crypto.sign(null, revocations, privateKey).toString('base64');
+fs.writeFileSync(path.join(ROOT, 'revocations.sig.json'), JSON.stringify({ algorithm: 'Ed25519', signature: revocationSignature, publicKey: 'release-public-key.pem' }, null, 2) + '\n');
 console.log('plugin index signed');

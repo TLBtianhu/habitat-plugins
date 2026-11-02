@@ -1,0 +1,5 @@
+{
+  "algorithm": "Ed25519",
+  "signature": "oC29ynvcPTKegZp10PBijsd3FWcY1zRBSpWSWmB4zGzRK9X0QKjAJfJ5KNvvXl6+x1f9gwwUycmyzyHvWWQiDA==",
+  "publicKey": "release-public-key.pem"
+}
