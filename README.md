@@ -6,9 +6,8 @@ Habitat 的独立应用插件索引与制品。本体与应用分开：应用插
 
 - `app-qq`：OneBot 连接监督、ResidencePolicy 与受限 `qq.reply`；
 - `app-bilibili`：B站 WBI/WSS 弹幕读取与连接监督；
-- `app-mc`：mcpfabric 文字观测与闭集 MC 动作。
-
-HLS 暂不单独发布，因为它与 Desktop/Audio 的共享运行时边界还需要独立拆分。
+- `app-mc`：mcpfabric 文字观测与闭集 MC 动作；
+- `app-hls`：独立本地 HLS Outlet，通过 Core 的 `desktop.capture` 与 `audio.capture` 获取内容，不包含 Desktop/Voice 实现，也不启动公网推流。
 
 ## 索引协议
 

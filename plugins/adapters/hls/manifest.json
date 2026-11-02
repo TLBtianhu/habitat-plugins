@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "hls",
+  "name": "hls",
+  "displayName": "本地 HLS Outlet",
+  "kind": "hls",
+  "version": "0.3.0",
+  "lifecycle": "outlet",
+  "entry": "../../tools/wsl-pipeline-up.sh",
+  "session": { "kind": "hls", "surface": false },
+  "capabilities": ["outlet.hls"],
+  "scopes": ["outlet.hls", "desktop.capture", "audio.capture"],
+  "requires": ["desktop.capture", "audio.capture"],
+  "tools": [],
+  "permissions": ["outlet.hls", "desktop.capture", "audio.capture"]
+}

@@ -38,6 +38,14 @@ const APPS = {
       'agent/durable-outbox.mjs',
     ],
   },
+  hls: {
+    version: '0.1.0',
+    dependencies: {},
+    files: [
+      'adapters/hls/manifest.json',
+      'tools/wsl-pipeline-up.sh', 'tools/pipeline.mjs',
+    ],
+  },
 };
 
 function copyApp(id, def) {
@@ -79,7 +87,7 @@ for (const [id, def] of Object.entries(APPS)) {
   entries.push({
     id,
     version: def.version,
-    kind: 'adapter',
+    kind: manifest.kind,
     apiRange: '^1.0.0',
     entry: `adapters/${id}/manifest.json`,
     lifecycle: manifest.lifecycle,
@@ -89,7 +97,7 @@ for (const [id, def] of Object.entries(APPS)) {
     license: 'MIT',
     artifact: {
       file: `dist/app-${id}.zip`,
-      url: `https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.2/app-${id}.zip`,
+      url: `https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.3/app-${id}.zip`,
       sha256: hash,
     },
     revoked: false,

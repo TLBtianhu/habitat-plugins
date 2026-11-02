@@ -6,7 +6,7 @@ import { execFileSync } from 'node:child_process';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-for (const id of ['qq', 'bilibili', 'mc']) {
+for (const id of ['qq', 'bilibili', 'mc', 'hls']) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), `habitat-app-${id}-`));
   const zip = path.join(ROOT, 'dist', `app-${id}.zip`);
   const python = process.platform === 'win32' ? 'py' : 'python3';
@@ -26,6 +26,15 @@ for (const id of ['qq', 'bilibili', 'mc']) {
     await runtime.start();
     if (runtime.status().state !== 'disabled') throw new Error('unconfigured Bilibili runtime must stay disabled');
     await runtime.stop();
+  } else if (id === 'hls') {
+    const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'adapters/hls/manifest.json'), 'utf8'));
+    if (manifest.lifecycle !== 'outlet' || !manifest.requires.includes('desktop.capture') || !manifest.requires.includes('audio.capture')) {
+      throw new Error('hls runtime dependencies missing');
+    }
+    const entry = path.resolve(path.dirname(path.join(dir, 'adapters/hls/manifest.json')), manifest.entry);
+    if (!fs.existsSync(entry) || !fs.existsSync(path.join(dir, 'tools/pipeline.mjs'))) throw new Error('hls outlet files missing');
+    const script = fs.readFileSync(entry, 'utf8');
+    if (script.includes('/opt/habitat/app')) throw new Error('hls outlet must not hardcode the development app path');
   } else {
     const { createHandlers, createRuntime } = await import(pathToFileURL(path.join(dir, 'adapters/mc/provider.mjs')).href);
     const runtime = createRuntime({ mcClientFactory: () => ({ obs: async () => ({ mode: 'play' }), act: async () => ({ ok: true }) }) });
@@ -37,4 +46,4 @@ for (const id of ['qq', 'bilibili', 'mc']) {
   }
   fs.rmSync(dir, { recursive: true, force: true });
 }
-console.log('ok: qq/bilibili/mc 独立解包与最小 provider 加载');
+console.log('ok: qq/bilibili/mc/hls 独立解包与最小 runtime/entry 验收');
