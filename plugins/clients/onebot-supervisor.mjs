@@ -44,8 +44,10 @@ export class OneBotConnectionSupervisor {
     this.state = 'stopped';
     if (this.retryTimer) clearTimeout(this.retryTimer);
     this.retryTimer = null;
+    this.nextRetryAt = 0;
     if (this.watchdog) clearInterval(this.watchdog);
     this.watchdog = null;
+    this.pending = [];
     const ws = this.ws;
     this.ws = null;
     if (ws) {

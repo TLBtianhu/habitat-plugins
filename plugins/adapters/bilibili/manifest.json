@@ -5,12 +5,13 @@
   "displayName": "B 站客户端",
   "kind": "bilibili",
   "version": "0.2.0",
-  "lifecycle": "adapter",
+  "lifecycle": "provider",
+  "provider": "provider.mjs",
   "session": { "kind": "bilibili" },
   "entry": "server.mjs",
   "capabilities": ["bilibili.read", "bilibili.danmaku", "bilibili.login"],
   "authFlows": ["qrcode"],
-  "scopes": ["live.read", "live.write", "live.push"],
+  "scopes": ["live.read"],
   "tools": [],
-  "permissions": ["live.read", "live.write"]
+  "permissions": ["live.read"]
 }

@@ -13,19 +13,27 @@ for (const id of ['qq', 'bilibili', 'mc']) {
   const code = `import zipfile; zipfile.ZipFile(${JSON.stringify(zip)}).extractall(${JSON.stringify(dir)})`;
   execFileSync(python, process.platform === 'win32' ? ['-3', '-c', code] : ['-c', code], { stdio: 'inherit' });
   if (id === 'qq') {
-    const { createHandlers } = await import(pathToFileURL(path.join(dir, 'adapters/qq/provider.mjs')).href);
-    if (typeof createHandlers !== 'function') throw new Error('qq provider export missing');
-    const handlers = createHandlers({ onebotClient: {}, policy: {}, getResidenceContext: () => null });
+    const { createHandlers, createRuntime } = await import(pathToFileURL(path.join(dir, 'adapters/qq/provider.mjs')).href);
+    const runtime = createRuntime({ env: {}, onebotClientFactory: () => ({}) });
+    const handlers = createHandlers({ runtime, policy: {}, getResidenceContext: () => null });
     if (typeof handlers.reply !== 'function') throw new Error('qq.reply handler missing');
+    await runtime.start();
+    if (runtime.status().state !== 'disabled') throw new Error('unconfigured QQ runtime must stay disabled');
+    await runtime.stop();
   } else if (id === 'bilibili') {
-    const { BiliDanmakuClient } = await import(pathToFileURL(path.join(dir, 'clients/bilibili-danmaku.mjs')).href);
-    const client = new BiliDanmakuClient({ roomId: 1, cookie: '' });
-    if (client.roomId !== 1) throw new Error('bilibili client failed to initialize');
+    const { createRuntime } = await import(pathToFileURL(path.join(dir, 'adapters/bilibili/provider.mjs')).href);
+    const runtime = createRuntime({ env: {} });
+    await runtime.start();
+    if (runtime.status().state !== 'disabled') throw new Error('unconfigured Bilibili runtime must stay disabled');
+    await runtime.stop();
   } else {
-    const { createHandlers } = await import(pathToFileURL(path.join(dir, 'adapters/mc/provider.mjs')).href);
-    const handlers = createHandlers({ client: { obs: async () => ({ mode: 'play' }) } });
+    const { createHandlers, createRuntime } = await import(pathToFileURL(path.join(dir, 'adapters/mc/provider.mjs')).href);
+    const runtime = createRuntime({ mcClientFactory: () => ({ obs: async () => ({ mode: 'play' }), act: async () => ({ ok: true }) }) });
+    const handlers = createHandlers({ runtime });
+    await runtime.start();
     const obs = await handlers.obs();
     if (obs.mode !== 'play') throw new Error('mc provider obs failed');
+    await runtime.stop();
   }
   fs.rmSync(dir, { recursive: true, force: true });
 }

@@ -11,7 +11,7 @@
   "plugins": [
     {
       "id": "qq",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "kind": "adapter",
       "apiRange": "^1.0.0",
       "entry": "adapters/qq/manifest.json",
@@ -33,43 +33,40 @@
       "license": "MIT",
       "artifact": {
         "file": "dist/app-qq.zip",
-        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.1/app-qq.zip",
-        "sha256": "f29308575ff90b282b184987ecdb92db41d7295dc437b4b2cd13c2a6b3c07e2e"
+        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.2/app-qq.zip",
+        "sha256": "ac091b24f6d5451160314609ddc1e76b1b7f9fff01a7fde051a28707a238b14d"
       },
       "revoked": false
     },
     {
       "id": "bilibili",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "kind": "adapter",
       "apiRange": "^1.0.0",
       "entry": "adapters/bilibili/manifest.json",
-      "lifecycle": "adapter",
+      "lifecycle": "provider",
       "capabilities": [
         "bilibili.read",
         "bilibili.danmaku",
         "bilibili.login"
       ],
       "scopes": [
-        "live.read",
-        "live.write",
-        "live.push"
+        "live.read"
       ],
       "permissions": [
-        "live.read",
-        "live.write"
+        "live.read"
       ],
       "license": "MIT",
       "artifact": {
         "file": "dist/app-bilibili.zip",
-        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.1/app-bilibili.zip",
-        "sha256": "3f640608dea6acd15a504b3af65c73d2e9254efabbb128a0c909297dcf760022"
+        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.2/app-bilibili.zip",
+        "sha256": "1767cd520ec892a15b88253391377ac44ed01d71d4c52006ed8f7bf0bd3aebf4"
       },
       "revoked": false
     },
     {
       "id": "mc",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "kind": "adapter",
       "apiRange": "^1.0.0",
       "entry": "adapters/mc/manifest.json",
@@ -92,8 +89,8 @@
       "license": "MIT",
       "artifact": {
         "file": "dist/app-mc.zip",
-        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.1/app-mc.zip",
-        "sha256": "eac5230406a7ac687086ce2290afe176160b13b441d787b2cea5ec617d9b8789"
+        "url": "https://github.com/TLBtianhu/habitat-plugins/releases/download/plugins-v0.1.2/app-mc.zip",
+        "sha256": "18c218d2a1d51d223bd416e4729d04591f26865bc7cf9edb6d38028487b7a571"
       },
       "revoked": false
     }

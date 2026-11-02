@@ -40,8 +40,10 @@ export class BiliConnectionSupervisor {
     this.state = 'stopped';
     if (this.retryTimer) clearTimeout(this.retryTimer);
     this.retryTimer = null;
+    this.nextRetryAt = 0;
     if (this.watchdog) clearInterval(this.watchdog);
     this.watchdog = null;
+    this.pending = [];
     this.client?.close();
     this.client = null;
   }
