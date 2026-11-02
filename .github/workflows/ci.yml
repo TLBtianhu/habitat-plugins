@@ -16,7 +16,6 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --no-audit --no-fund
-      - run: node tools/verify-plugin-index.mjs
       - run: node tools/build-plugin-packages.mjs
       - run: node tools/verify-plugin-index.mjs
       - run: node tools/verify-app-loading.mjs
